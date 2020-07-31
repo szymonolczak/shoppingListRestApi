@@ -1,12 +1,12 @@
 package com.shoppingList.model.currency;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shoppingList.model.ClassScheme;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class CurrencyRate implements Serializable {
-
+public class CurrencyRate extends ClassScheme implements Serializable {
 
     String table;
 

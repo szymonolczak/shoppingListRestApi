@@ -1,8 +1,8 @@
 package com.shoppingList.model.currency.currency_code_mapping;
 
+import com.shoppingList.model.ClassScheme;
+
 import javax.xml.bind.annotation.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @XmlRootElement(name = "ISO_4217")
 @XmlAccessorType(XmlAccessType.FIELD)
