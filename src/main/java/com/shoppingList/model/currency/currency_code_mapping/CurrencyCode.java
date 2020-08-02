@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "ISO_4217")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CurrencyCode {
+public class CurrencyCode extends ClassScheme {
 
     @XmlElement(name = "CcyTbl")
     public CurrencyTable currencyTable;

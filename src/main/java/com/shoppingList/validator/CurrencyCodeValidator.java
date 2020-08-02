@@ -38,7 +38,8 @@ public class CurrencyCodeValidator implements ValidatorCondition<String> {
                     .collect(Collectors.toList());
 
         if(currencyCodes.stream().noneMatch(validateValue.toUpperCase()::equals)){
-            constraintViolation.getViolations().add(ErrorCode.UNSUPPORTED_CURRENCY_CODE);
+            constraintViolation.getViolations()
+                               .add(ErrorCode.UNSUPPORTED_CURRENCY_CODE);
         }
         return Optional.of(constraintViolation);
     }

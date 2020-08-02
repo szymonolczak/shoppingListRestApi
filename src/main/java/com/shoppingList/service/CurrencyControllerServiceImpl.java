@@ -39,11 +39,11 @@ public class CurrencyControllerServiceImpl implements CurrencyControllerService 
         Optional<ConstraintViolation> errors = currencyCodeValidator.validate(currencyName);
         errors.ifPresent(constraintViolation -> error.addAll(constraintViolation.getViolations()));
 
-        if(!error.isEmpty()){
+        if (!error.isEmpty()) {
             throw new CurrencyViolationException(error);
         }
 
-        ResponseEntity<CurrencyRate> responseEntity = restTemplate.exchange(BASE_URL+"exchangerates/rates/a/"+currencyName,HttpMethod.GET, httpEntity, CurrencyRate.class);
+        ResponseEntity<CurrencyRate> responseEntity = restTemplate.exchange(BASE_URL + "exchangerates/rates/a/" + currencyName, HttpMethod.GET, httpEntity, CurrencyRate.class);
 
         return responseEntity.getBody();
     }
