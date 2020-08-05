@@ -1,8 +1,11 @@
 package com.shoppingList.model;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 public class ClassScheme {
 
-    protected ConstraintViolation constraintViolation;
+    @XmlTransient
+    public ConstraintViolation constraintViolation;
 
     public ClassScheme() {
     }
@@ -12,7 +15,7 @@ public class ClassScheme {
     }
 
     public ConstraintViolation getConstraintViolation() {
-        return constraintViolation;
+        return this.constraintViolation;
     }
 
     public void setConstraintViolation(ConstraintViolation constraintViolation) {

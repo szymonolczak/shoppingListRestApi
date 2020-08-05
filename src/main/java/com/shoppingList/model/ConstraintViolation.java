@@ -9,11 +9,15 @@ public class ConstraintViolation {
     public List<String> violations;
 
     public ConstraintViolation(){
-        violations = new ArrayList<>();
+
     }
 
     public List<String> getViolations() {
-        return violations;
+        if(Objects.isNull(violations)) {
+            this.violations = new ArrayList<>();
+            return this.violations;
+        }
+        return this.violations;
     }
 
     public void setViolations(List<String> violations) {
