@@ -6,17 +6,13 @@ import java.util.Objects;
 
 public class ConstraintViolation {
 
-    public List<String> violations;
+    private List<String> violations = new ArrayList<>();
 
     public ConstraintViolation(){
 
     }
 
     public List<String> getViolations() {
-        if(Objects.isNull(violations)) {
-            this.violations = new ArrayList<>();
-            return this.violations;
-        }
         return this.violations;
     }
 

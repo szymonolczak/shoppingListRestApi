@@ -43,8 +43,11 @@ public class CurrencyControllerServiceImpl implements CurrencyControllerService 
             throw new CurrencyViolationException(error);
         }
 
-        ResponseEntity<CurrencyRate> responseEntity = restTemplate.exchange(BASE_URL + "exchangerates/rates/a/" + currencyName, HttpMethod.GET, httpEntity, CurrencyRate.class);
+        return getCurrencyFromRemote(BASE_URL + "exchangerates/rates/a/",currencyName).getBody();
+    }
 
-        return responseEntity.getBody();
+    private ResponseEntity<CurrencyRate> getCurrencyFromRemote(String url, String currencyName) {
+        return  restTemplate.exchange(url + currencyName, HttpMethod.GET, httpEntity, CurrencyRate.class);
+
     }
 }

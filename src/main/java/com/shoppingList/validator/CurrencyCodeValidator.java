@@ -2,6 +2,7 @@ package com.shoppingList.validator;
 
 import com.shoppingList.model.ConstraintViolation;
 import com.shoppingList.model.ErrorCode;
+import com.shoppingList.model.currency.currency_code_mapping.CurrencyCode;
 import com.shoppingList.model.currency.currency_code_mapping.CurrencyCodeDetails;
 import com.shoppingList.service.CurrencyCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +29,15 @@ public class CurrencyCodeValidator implements ValidatorCondition<String> {
                 constraintViolation.getViolations().add(ErrorCode.NULL_CURRENCY_CODE);
                 return Optional.of(constraintViolation);
             }
-            List<String> currencyCodes = currencyCodeService
-                    .getCurrenciesCode()
-                    .getCurrencyTable()
+             CurrencyCode currencyCodes = currencyCodeService.getCurrenciesCode();
+        List<String> codes = currencyCodes.getCurrencyTable()
                     .getCurrencyCodeDetails()
                     .stream()
                     .filter(x -> Objects.nonNull(x.getCcy()))
                     .map(CurrencyCodeDetails::getCcy)
                     .collect(Collectors.toList());
 
-        if(currencyCodes.stream().noneMatch(validateValue.toUpperCase()::equals)){
+        if(codes.stream().noneMatch(validateValue.toUpperCase()::equals)){
             constraintViolation.getViolations()
                                .add(ErrorCode.UNSUPPORTED_CURRENCY_CODE);
         }

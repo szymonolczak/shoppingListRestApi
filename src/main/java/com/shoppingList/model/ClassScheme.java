@@ -1,6 +1,7 @@
 package com.shoppingList.model;
 
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Objects;
 
 public class ClassScheme {
 
@@ -15,6 +16,10 @@ public class ClassScheme {
     }
 
     public ConstraintViolation getConstraintViolation() {
+        if(Objects.isNull(this.constraintViolation)) {
+            this.constraintViolation = new ConstraintViolation();
+            return this.constraintViolation;
+        }
         return this.constraintViolation;
     }
 

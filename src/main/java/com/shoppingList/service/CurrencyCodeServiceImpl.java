@@ -29,7 +29,7 @@ public class CurrencyCodeServiceImpl implements CurrencyCodeService {
     @Scheduled(fixedDelay = 10000)
     public CurrencyCode getCurrenciesCode() throws JAXBException {
         CurrencyCode currencyCode = new CurrencyCode();
-        Optional<String> xmlDocument = Optional.ofNullable(restTemplate.exchange(URL, HttpMethod.GET, httpEntity, String.class).getBody());
+        Optional<String> xmlDocument = Optional.ofNullable(restTemplate.exchange(URL, HttpMethod.GET, httpEntity, String.class)).map(HttpEntity::getBody);
         if (xmlDocument.isPresent()) {
             currencyCode = ((CurrencyCode) createJaxbContextWithUnmarshaller(CurrencyCode.class)
                     .unmarshal(new StringReader(xmlDocument.get())));
