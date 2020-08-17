@@ -1,44 +1,37 @@
 package com.shoppingList.service;
 
 import static com.shoppingList.service.CurrencyCodeService.URL;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.shoppingList.model.ErrorCode;
 import com.shoppingList.model.StaticStubData;
 import com.shoppingList.model.currency.currency_code_mapping.CurrencyCode;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 
-
+@ExtendWith(SpringExtension.class)
 public class CurrencyCodeServiceTest {
 
     @Mock
-    RestTemplate restTemplate = mock(RestTemplate.class);
+    RestTemplate restTemplate;
 
     @Mock
-    HttpEntity httpEntity = mock(HttpEntity.class);
-    ;
+    HttpEntity httpEntity;
 
-    CurrencyCodeService currencyCodeService;
-
-    @BeforeEach
-    public void testsSetup() {
-        currencyCodeService = new CurrencyCodeServiceImpl();
-        ReflectionTestUtils.setField(currencyCodeService, "restTemplate", restTemplate);
-        ReflectionTestUtils.setField(currencyCodeService, "httpEntity", httpEntity);
-    }
+    @InjectMocks
+    CurrencyCodeServiceImpl currencyCodeService;
 
     @Test
     public void should_Return_Cannot_Download_Currency() throws Exception {
-        //when
+        //given
         when(restTemplate.exchange(URL, HttpMethod.GET, httpEntity, String.class)).thenReturn(null);
 
         //when

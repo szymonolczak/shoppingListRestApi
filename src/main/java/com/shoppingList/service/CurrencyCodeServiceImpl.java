@@ -19,10 +19,8 @@ import java.util.Optional;
 @Service
 public class CurrencyCodeServiceImpl implements CurrencyCodeService {
 
-    @Autowired
     RestTemplate restTemplate;
 
-    @Autowired
     HttpEntity httpEntity;
 
     @Cacheable(cacheNames = "currencies_codes")
@@ -39,5 +37,11 @@ public class CurrencyCodeServiceImpl implements CurrencyCodeService {
                 .getViolations()
                 .add(ErrorCode.CANNOT_DOWNLOAD_ACTUAL_CURRENCIES);
         return currencyCode;
+    }
+
+    @Autowired
+    public CurrencyCodeServiceImpl(HttpEntity httpEntity, RestTemplate restTemplate) {
+        this.httpEntity = httpEntity;
+        this.restTemplate = restTemplate;
     }
 }
